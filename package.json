@@ -1,0 +1,33 @@
+{
+  "name": "css-objectifier",
+  "version": "0.0.1",
+  "description": "creates javascript objects from a css stylesheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/* --recursive --compilers js:babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GGAlanSmithee/css-objectifier.git"
+  },
+  "keywords": [
+    "javascript",
+    "css",
+    "objectifier"
+  ],
+  "author": "Alan Smithee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GGAlanSmithee/css-objectifier/issues"
+  },
+  "homepage": "https://github.com/GGAlanSmithee/css-objectifier",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "chai": "^3.3.0",
+    "css": "^2.2.1",
+    "css-parse": "^2.0.0",
+    "htmlparser2": "^3.8.3",
+    "mocha": "^2.3.3",
+    "radium": "^0.14.1"
+  }
+}
