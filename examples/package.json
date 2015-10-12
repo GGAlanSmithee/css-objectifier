@@ -1,0 +1,20 @@
+{
+  "name": "css-objectifier-examples",
+  "version": "0.0.1",
+  "description": "examples folder of css objectifier",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "css-objectifier",
+    "examples"
+  ],
+  "author": "Alan Smithee",
+  "license": "MIT",
+  "dependencies": {
+    "radium": "^0.14.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
+}
