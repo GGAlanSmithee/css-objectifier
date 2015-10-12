@@ -1,2 +1,3 @@
-# cs
-creates javascript ojects from a css stylesheet
+# CSS Objectifier
+
+Creates javascript ojects from a CSS stylesheet
