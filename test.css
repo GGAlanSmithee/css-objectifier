@@ -1,0 +1,15 @@
+row {
+   background-color: red !important;
+}
+
+row:hover {
+    background-color: blue;
+}
+
+column {
+    border: 1px solid black;
+}
+
+row column {
+    border: 2px solid black;
+}
