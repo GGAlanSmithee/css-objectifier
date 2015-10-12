@@ -1,4 +1,2 @@
-# css-objectifier
-
-## WIP - Marcus var är du ???!!
-creates javascript ojects from a css style sheet
+# cs
+creates javascript ojects from a css stylesheet
