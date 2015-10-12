@@ -1,6 +1,7 @@
 # css-objectifier
 
-## WIP - Marcus var är du ???!!
+## WIP - not ready for use yet!
+
 creates javascript ojects from a css style sheet
 
 ## TODO
