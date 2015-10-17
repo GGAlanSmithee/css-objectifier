@@ -12,9 +12,11 @@ export function toObject(stylesheet) {
     
     for (let rule of stylesheet.rules) {
         for (let selector of rule.selectors) {
-            let obj = style[selector] || {
-                    
-            };
+            console.log(selector);
+            
+            // todo resolve selector type (regex) - WIP in /core/selector-type.js
+            
+            let obj = style[selector] || {};
                 
             for (let declaration of rule.declarations) {
                 if (obj[declaration.property] && obj[declaration.property].indexOf('!important') !== -1) {
@@ -44,18 +46,3 @@ export default function objectify(path) {
 
     return toObject(parse(data).stylesheet);
 }
-/*const htmlparser = require("htmlparser2");
-
-var rawHtml = "<div><p>Hello!</p></div><p>Bye!</p>";
-
-let handler = new htmlparser.DomHandler(function(error, dom) {
-    if (error)
-        console.error(error);
-    else
-        console.log(error);
-});
-
-var parser = new htmlparser.Parser(handler);
-parser.parseComplete(rawHtml);
-
-console.log(handler.dom);*/
