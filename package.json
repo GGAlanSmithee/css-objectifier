@@ -29,5 +29,8 @@
     "htmlparser2": "^3.8.3",
     "mocha": "^2.3.3",
     "radium": "^0.14.1"
+  },
+  "devDependencies": {
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git"
   }
 }

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { getType, SelectorType } from '../src/core/selector-type';
+import getType, { SelectorType } from '../src/core/selector-type';
 
 describe('getType(selector)', function() {
     describe('Selectors', () => {
