@@ -27,7 +27,7 @@ export const SelectorType = {
  */
 const SelectorCategoryRegex = {
     Type : /^[A-Za-z]+/,
-    Attribute : /^[A-Za-z]+\[*\]$/,
+    Attribute : /^[A-Za-z]+\[[^\]]*\]$/,
 };
 
 /**
