@@ -25,11 +25,11 @@ export const SelectorType = {
  * 
  * @author Alan Smithee
  */
-export const Regex = {
+const Regex = {
     None : '',
     Invalid : '',
     Universal : /\*/,
-    Type : /^[A-Za-z]+/,
+    Type : /^[A-Za-z]/,
     TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,
     TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,
     Class : /^\.[A-Za-z]+$/,
@@ -54,12 +54,13 @@ export default function getType(selector) {
         return SelectorType.Universal;
     }
     
-    return  selector === '*' ? SelectorType.Universal :
-            Regex.Class.test(selector) ? SelectorType.Class :
-            Regex.Id.test(selector) ? SelectorType.Id :
-            Regex.Type.test(selector) ? 
-                (Regex.TypeClass.test(selector) ? SelectorType.TypeClass :
-                 Regex.TypeId.test(selector) ? SelectorType.TypeId :
-                 SelectorType.Type) :
-            SelectorType.None;
+    if (Regex.Type.test(selector)) {
+        return Regex.TypeClass.test(selector) ? SelectorType.TypeClass :
+               Regex.TypeId.test(selector) ? SelectorType.TypeId :
+               SelectorType.Type;
+    }
+    
+    return Regex.Class.test(selector) ? SelectorType.Class :
+           Regex.Id.test(selector) ? SelectorType.Id :
+           SelectorType.None;
 }
