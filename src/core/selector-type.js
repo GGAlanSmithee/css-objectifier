@@ -14,10 +14,11 @@ export const SelectorType = {
     Typeid : 4,
     Class : 5,
     Id : 6,
-    DescendantCombinator : 7,
-    ChildCombinator : 8,
-    AdjacentSiblingCombinator : 9,
-    GeneralSiblingCombinator : 10
+    Attribute : 7,
+    DescendantCombinator : 8,
+    ChildCombinator : 9,
+    AdjacentSiblingCombinator : 10,
+    GeneralSiblingCombinator : 11
 };
 
 /**
@@ -44,7 +45,7 @@ const SelectorTypeRegex = {
     TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,
     Class : /^\.[A-Za-z]+$/,
     Id : /^\#[A-Za-z]+$/,
-    
+    Attribute : /^\#[A-Za-z]+\[[A-Za-z]\]$/
 };
 
 /**
@@ -71,7 +72,8 @@ export default function getType(selector) {
     }
     
     if (SelectorCategoryRegex.Attribute.test(selector)) {
-        return SelectorType.Invalid;
+        return SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
+               SelectorType.Invalid;
     }
     
     return SelectorTypeRegex.Class.test(selector) ? SelectorType.Class :

@@ -7,9 +7,13 @@ describe('getType(selector)', function() {
         it('Invalid selector (E E)', () => {
             expect(getType('e e')).to.equal(SelectorType.Invalid);
         });
-            
+        
         it('Type selector (E)', () => {
             expect(getType('div')).to.equal(SelectorType.Type);
+        });
+        
+        it('Attribute selector (E[foo])', () => {
+            expect(getType('div[test]')).to.equal(SelectorType.Attribute);
         });
         
         it('Class selector (.class)', () => {
@@ -24,7 +28,7 @@ describe('getType(selector)', function() {
             expect(getType('#id')).to.equal(SelectorType.Id);
         });
         
-        it('Element.Id selector (E#id)', () => {
+        it('Element#Id selector (E#id)', () => {
             expect(getType('E#div')).to.equal(SelectorType.TypeId);
         });
     });
