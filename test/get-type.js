@@ -4,6 +4,10 @@ import getType, { SelectorType } from '../src/core/selector-type';
 
 describe('getType(selector)', function() {
     describe('Selectors', () => {
+        it('Invalid selector (E E)', () => {
+            expect(getType('e e')).to.equal(SelectorType.Invalid);
+        });
+            
         it('Type selector (E)', () => {
             expect(getType('div')).to.equal(SelectorType.Type);
         });

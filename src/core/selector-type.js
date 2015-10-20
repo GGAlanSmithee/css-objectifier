@@ -29,7 +29,8 @@ const Regex = {
     None : '',
     Invalid : '',
     Universal : /\*/,
-    Type : /^[A-Za-z]/,
+    TypeCategory : /^[A-Za-z]+/,
+    Type : /^[A-Za-z]+$/,
     TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,
     TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,
     Class : /^\.[A-Za-z]+$/,
@@ -48,16 +49,15 @@ const Regex = {
  * @return {SelectorType} type
  */
 export default function getType(selector) {
-    console.log(selector, /^.[A-Za-z]+$/.test(selector));
-    
     if (selector === '*') {
         return SelectorType.Universal;
     }
     
-    if (Regex.Type.test(selector)) {
+    if (Regex.TypeCategory.test(selector)) {
         return Regex.TypeClass.test(selector) ? SelectorType.TypeClass :
                Regex.TypeId.test(selector) ? SelectorType.TypeId :
-               SelectorType.Type;
+               Regex.Type.test(selector) ? SelectorType.Type :
+               SelectorType.Invalid;
     }
     
     return Regex.Class.test(selector) ? SelectorType.Class :
