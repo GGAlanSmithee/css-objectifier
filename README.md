@@ -6,7 +6,7 @@ creates javascript ojects from a css style sheet
 ## How?
 - `npm test` To run tests
 
-## WHy?
+## Why?
 - Computational CSS
 - Complete component bundles - scematics, style and behavior
 - https://www.youtube.com/watch?v=ERB1TJBn32c
