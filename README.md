@@ -3,6 +3,8 @@
 ## WIP - not ready for use yet!
 creates javascript ojects from a css style sheet
 
+## How?
+- `npm test` To run tests
 
 ## WHy?
 - Computational CSS
