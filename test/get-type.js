@@ -16,6 +16,10 @@ describe('getType(selector)', function() {
             expect(getType('div[test]')).to.equal(SelectorType.Attribute);
         });
         
+        it('Attribute exact selector (E[foo="bar"])', () => {
+            expect(getType('a[href="a"]')).to.equal(SelectorType.AttributeExact);
+        });
+        
         it('Class selector (.class)', () => {
             expect(getType('.class')).to.equal(SelectorType.Class);
         });

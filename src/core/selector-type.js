@@ -14,11 +14,17 @@ export const SelectorType = {
     Typeid : 4,
     Class : 5,
     Id : 6,
-    Attribute : 7,
-    DescendantCombinator : 8,
-    ChildCombinator : 9,
-    AdjacentSiblingCombinator : 10,
-    GeneralSiblingCombinator : 11
+    Attribute : 7,            // E[attr]
+    AttributeExact : 8,       // E[attr=value]
+    AttributeExactHyphen : 9, // E[attr|=value]
+    AttributeList : 10,       // E[attr~=value]
+    AttributePrefix : 11,     // E[attr^=value]
+    AttributeSuffix : 12,     // E[attr$=value]
+    AttributeContains : 13,   // E[attr*=value]
+    DescendantCombinator : 14,
+    ChildCombinator : 15,
+    AdjacentSiblingCombinator : 16,
+    GeneralSiblingCombinator : 17
 };
 
 /**
@@ -45,7 +51,13 @@ const SelectorTypeRegex = {
     TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,
     Class : /^\.[A-Za-z]+$/,
     Id : /^\#[A-Za-z]+$/,
-    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/
+    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                     // E[attr]
+    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/, // E[attr=value]
+    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,          // E[attr|=value]
+    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                 // E[attr~=value]
+    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\]$/,               // E[attr^=value]
+    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\]$/,               // E[attr$=value]
+    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\]$/              // E[attr*=value]
 };
 
 /**
@@ -65,7 +77,8 @@ export default function getType(selector) {
     }
     
     if (SelectorCategoryRegex.Attribute.test(selector)) {
-        return SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
+        return SelectorTypeRegex.AttributeExact.test(selector) ? SelectorType.AttributeExact :
+               SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
                SelectorType.Invalid;
     }
     
