@@ -28,7 +28,7 @@ export const SelectorType = {
  */
 const SelectorCategoryRegex = {
     Type : /^[A-Za-z]+/,
-    Attribute : /^[A-Za-z]+\[[^\]]*\]$/,
+    Attribute : /^[A-Za-z]+\[.+?\]$/,
 };
 
 /**
@@ -45,7 +45,7 @@ const SelectorTypeRegex = {
     TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,
     Class : /^\.[A-Za-z]+$/,
     Id : /^\#[A-Za-z]+$/,
-    Attribute : /^\#[A-Za-z]+\[[A-Za-z]\]$/
+    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/
 };
 
 /**
@@ -64,15 +64,15 @@ export default function getType(selector) {
         return SelectorType.Universal;
     }
     
+    if (SelectorCategoryRegex.Attribute.test(selector)) {
+        return SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
+               SelectorType.Invalid;
+    }
+    
     if (SelectorCategoryRegex.Type.test(selector)) {
         return SelectorTypeRegex.TypeClass.test(selector) ? SelectorType.TypeClass :
                SelectorTypeRegex.TypeId.test(selector) ? SelectorType.TypeId :
                SelectorTypeRegex.Type.test(selector) ? SelectorType.Type :
-               SelectorType.Invalid;
-    }
-    
-    if (SelectorCategoryRegex.Attribute.test(selector)) {
-        return SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
                SelectorType.Invalid;
     }
     
