@@ -45,19 +45,19 @@ const SelectorCategoryRegex = {
 const SelectorTypeRegex = {
     None : '',
     Invalid : '',
-    Universal : /\*/,                                              // *
-    Type : /^[A-Za-z]+$/,                                          // E
-    TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,                          // E.Class
-    TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,                             // E#Id
-    Class : /^\.[A-Za-z]+$/,                                       // .Class
-    Id : /^\#[A-Za-z]+$/,                                          // #Id
-    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                        // E[attr]
-    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,    // E[attr=value]
-    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,             // E[attr|=value]
-    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                    // E[attr~=value]
-    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/, // E[attr^=value]
-    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/, // E[attr$=value]
-    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\]$/                 // E[attr*=value]
+    Universal : /\*/,                                               // *
+    Type : /^[A-Za-z]+$/,                                           // E
+    TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,                           // E.Class
+    TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,                              // E#Id
+    Class : /^\.[A-Za-z]+$/,                                        // .Class
+    Id : /^\#[A-Za-z]+$/,                                           // #Id
+    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                         // E[attr]
+    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,     // E[attr=value]
+    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,              // E[attr|=value]
+    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                     // E[attr~=value]
+    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/,  // E[attr^=value]
+    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,  // E[attr$=value]
+    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/ // E[attr*=value]
 };
 
 /**
@@ -79,6 +79,7 @@ export default function getType(selector) {
     if (SelectorCategoryRegex.Attribute.test(selector)) {
         return SelectorTypeRegex.AttributePrefix.test(selector) ? SelectorType.AttributePrefix :
                SelectorTypeRegex.AttributeSuffix.test(selector) ? SelectorType.AttributeSuffix :
+               SelectorTypeRegex.AttributeContains.test(selector) ? SelectorType.AttributeContains :
                SelectorTypeRegex.AttributeExact.test(selector) ? SelectorType.AttributeExact :
                SelectorTypeRegex.Attribute.test(selector) ? SelectorType.Attribute :
                SelectorType.Invalid;

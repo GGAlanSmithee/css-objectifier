@@ -28,6 +28,10 @@ describe('getType(selector)', function() {
             expect(getType('a[href$="a"]')).to.equal(SelectorType.AttributeSuffix);
         });
         
+        it('Attribute contains selector (E[foo*="bar"])', () => {
+            expect(getType('a[href*="a"]')).to.equal(SelectorType.AttributeContains);
+        });
+        
         it('Class selector (.class)', () => {
             expect(getType('.class')).to.equal(SelectorType.Class);
         });
