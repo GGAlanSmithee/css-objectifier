@@ -20,6 +20,14 @@ describe('getType(selector)', function() {
             expect(getType('a[href="a"]')).to.equal(SelectorType.AttributeExact);
         });
         
+        it('Attribute prefix selector (E[foo^="bar"])', () => {
+            expect(getType('a[href^="a"]')).to.equal(SelectorType.AttributePrefix);
+        });
+        
+        it('Attribute suffix selector (E[foo$="bar"])', () => {
+            expect(getType('a[href$="a"]')).to.equal(SelectorType.AttributeSuffix);
+        });
+        
         it('Class selector (.class)', () => {
             expect(getType('.class')).to.equal(SelectorType.Class);
         });
