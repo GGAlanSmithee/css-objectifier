@@ -3,6 +3,25 @@
 import fs        from 'fs';
 import { parse } from 'css';
 
+import getType, { SelectorType } from './core/selector-type';
+
+/**
+ * Converts an external CSS stylesheet to a JavaScript stylesheet object
+ * 
+ * @author Alan Smithee
+ * @param {string} path path to the external stylesheet to convert
+ * @return {object} CSSObject
+ */
+export default function objectify(path) {
+    const data = fs.readFileSync(path, 'utf8');
+    
+    if (!data || !parse(data).stylesheet) {
+        return {};
+    }
+
+    return toObject(parse(data).stylesheet);
+}
+
 /**
  * Converts a stylesheet AST to a JavaScript stylesheet object
  * 
@@ -21,44 +40,26 @@ export function toObject(stylesheet) {
     
     for (let rule of stylesheet.rules) {
         for (let selector of rule.selectors) {
-            console.log(selector);
-            
-            // todo resolve selector type (regex) - WIP in /core/selector-type.js
-            
-            let obj = style[selector] || {};
-                
+            let obj = {};
+
             for (let declaration of rule.declarations) {
-                if (obj[declaration.property] && obj[declaration.property].indexOf('!important') !== -1) {
-                    if (declaration.value.indexOf('!important') !== -1) {
-                        obj[declaration.property] = declaration.value;
-                    }
-                    
-                    continue;
-                }
-                    
                 obj[declaration.property] = declaration.value;
             }
             
-            style[selector] = obj;
+            // todo refactor and generalize for all psuedoselector
+            if (getType(selector) === SelectorType.TypeClass) {
+                const [ topSelector, subSelector ] = selector.split(/(\.[a-zA-Z]+)/g);
+                
+                if (!style[topSelector]) {
+                    style[topSelector] = { };
+                }
+                
+                style[topSelector][subSelector] = Object.assign(style[topSelector][subSelector] || {}, obj);
+            } else {
+                style[selector] = Object.assign(style[selector] || {}, obj);
+            }
         }
     }
     
     return style;
-}
-
-/**
- * Converts an external CSS stylesheet to a JavaScript stylesheet object
- * 
- * @author Alan Smithee
- * @param {string} path path to the external stylesheet to convert
- * @return {object} CSSObject
- */
-export default function objectify(path) {
-    const data = fs.readFileSync(path, 'utf8');
-    
-    if (!data) {
-        return {};
-    }
-
-    return toObject(parse(data).stylesheet);
 }

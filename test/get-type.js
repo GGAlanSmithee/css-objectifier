@@ -5,7 +5,23 @@ import getType, { SelectorType } from '../src/core/selector-type';
 describe('getType(selector)', function() {
     describe('Selectors', () => {
         it('Invalid selector (E E)', () => {
-            expect(getType('e e')).to.equal(SelectorType.Invalid);
+            expect(getType('div span')).to.equal(SelectorType.Invalid);
+        });
+        
+        it('Invalid selector (E.class.class)', () => {
+            expect(getType('div.class1.class2')).to.equal(SelectorType.Invalid);
+        });
+        
+        it('Invalid selector (E.class#id)', () => {
+            expect(getType('div.class#id')).to.equal(SelectorType.Invalid);
+        });
+        
+        it('Invalid selector (E#id#id)', () => {
+            expect(getType('div#id1#id2')).to.equal(SelectorType.Invalid);
+        });
+        
+        it('Invalid selector (E#id.class)', () => {
+            expect(getType('div#id.class')).to.equal(SelectorType.Invalid);
         });
         
         it('Type selector (E)', () => {
