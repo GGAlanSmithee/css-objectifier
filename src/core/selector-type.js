@@ -24,7 +24,8 @@ export const SelectorType = {
     DescendantCombinator : 14,
     ChildCombinator : 15,
     AdjacentSiblingCombinator : 16,
-    GeneralSiblingCombinator : 17
+    GeneralSiblingCombinator : 17,
+    Root : 18,                // E:root, :root
 };
 
 /**
@@ -45,19 +46,20 @@ const SelectorCategoryRegex = {
 const SelectorTypeRegex = {
     None : '',
     Invalid : '',
-    Universal : /\*/,                                               // *
-    Type : /^[A-Za-z]+$/,                                           // E
-    TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,                           // E.Class
-    TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,                              // E#Id
-    Class : /^\.[A-Za-z]+$/,                                        // .Class
-    Id : /^\#[A-Za-z]+$/,                                           // #Id
-    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                         // E[attr]
-    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,     // E[attr=value]
-    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,              // E[attr|=value]
-    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                     // E[attr~=value]
-    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/,  // E[attr^=value]
-    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,  // E[attr$=value]
-    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/ // E[attr*=value]
+    Universal : /\*/,                                                // *
+    Type : /^[A-Za-z]+$/,                                            // E
+    TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,                            // E.Class
+    TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,                               // E#Id
+    Class : /^\.[A-Za-z]+$/,                                         // .Class
+    Id : /^\#[A-Za-z]+$/,                                            // #Id
+    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                          // E[attr]
+    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,      // E[attr=value]
+    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,               // E[attr|=value]
+    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                      // E[attr~=value]
+    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/,   // E[attr^=value]
+    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,   // E[attr$=value]
+    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/, // E[attr*=value]
+    Root : /(^|\s)[a-zA-Z]*:root(\s|$)/,                             // E:root, :root
 };
 
 /**
@@ -74,6 +76,10 @@ const SelectorTypeRegex = {
 export default function getType(selector) {
     if (selector === '*') {
         return SelectorType.Universal;
+    }
+    
+    if (SelectorTypeRegex.Root.test(selector)) {
+        return SelectorType.Root;
     }
     
     if (SelectorCategoryRegex.Attribute.test(selector)) {

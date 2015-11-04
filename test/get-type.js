@@ -71,5 +71,13 @@ describe('getType(selector)', function() {
         it('Element#Id selector (E#id)', () => {
             expect(getType('E#div')).to.equal(SelectorType.TypeId);
         });
+        
+        it('Root selector (:root)', () => {
+            expect(getType(':root')).to.equal(SelectorType.Root);
+        });
+        
+        it('Root selector (E:root)', () => {
+            expect(getType('div:root')).to.equal(SelectorType.Root);
+        });
     });
 });
