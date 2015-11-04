@@ -35,7 +35,7 @@ export const SelectorType = {
  */
 const SelectorCategoryRegex = {
     Type : /^[A-Za-z]+/,
-    Attribute : /^[A-Za-z]+\[.+?\]$/,
+    Attribute : /^(\#|\.)?[A-Za-z]+\[.+?\]$/,
 };
 
 /**
@@ -46,20 +46,20 @@ const SelectorCategoryRegex = {
 const SelectorTypeRegex = {
     None : '',
     Invalid : '',
-    Universal : /\*/,                                                // *
-    Type : /^[A-Za-z]+$/,                                            // E
-    TypeClass : /^[A-Za-z]+\.[A-Za-z]+$/,                            // E.Class
-    TypeId : /^[A-Za-z]+\#[A-Za-z]+$/,                               // E#Id
-    Class : /^\.[A-Za-z]+$/,                                         // .Class
-    Id : /^\#[A-Za-z]+$/,                                            // #Id
-    Attribute : /^[A-Za-z]+\[[A-Za-z]+\]$/,                          // E[attr]
-    AttributeExact : /^[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,      // E[attr=value]
-    AttributeExactHyphen : /^[A-Za-z]+\[[A-Za-z]+\]$/,               // E[attr|=value]
-    AttributeList : /^[A-Za-z]+\[[A-Za-z]+\]$/,                      // E[attr~=value]
-    AttributePrefix : /^[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/,   // E[attr^=value]
-    AttributeSuffix : /^[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,   // E[attr$=value]
-    AttributeContains : /^[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/, // E[attr*=value]
-    Root : /(^|\s)[a-zA-Z]*:root(\s|$)/,                             // E:root, :root
+    Universal : /\*/,                                                        // *
+    Type : /^[A-Za-z]+$/,                                                    // E
+    TypeClass : /^(\#|\.)?[A-Za-z]+\.[A-Za-z]+$/,                            // E.Class
+    TypeId : /^(\#|\.)?[A-Za-z]+\#[A-Za-z]+$/,                               // E#Id
+    Class : /^\.[A-Za-z]+$/,                                                 // .Class
+    Id : /^\#[A-Za-z]+$/,                                                    // #Id
+    Attribute : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\]$/,                          // E[attr]
+    AttributeExact : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\=\"[A-Za-z]+\"\]$/,      // E[attr=value]
+    AttributeExactHyphen : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\]$/,               // E[attr|=value]
+    AttributeList : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\]$/,                      // E[attr~=value]
+    AttributePrefix : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\^\=\"[A-Za-z]+\"\]$/,   // E[attr^=value]
+    AttributeSuffix : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,   // E[attr$=value]
+    AttributeContains : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/, // E[attr*=value]
+    Root : /^(\#|\.)?[a-zA-Z]*:root/,                                        // E:root, :root
 };
 
 /**
