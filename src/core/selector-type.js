@@ -26,6 +26,7 @@ export const SelectorType = {
     AdjacentSiblingCombinator : 16,
     GeneralSiblingCombinator : 17,
     Root : 18,                // E:root, :root
+    NthChild : 19
 };
 
 /**
@@ -36,6 +37,7 @@ export const SelectorType = {
 const SelectorCategoryRegex = {
     Type : /^[A-Za-z]+/,
     Attribute : /^(\#|\.)?[A-Za-z]+\[.+?\]$/,
+    NthChild : /^(\#|\.)?([A-Za-z]+)?\:nth-child\(([0-9]+|n[0-9]+\+[0-9]|odd|even)\)/
 };
 
 /**
@@ -60,6 +62,8 @@ const SelectorTypeRegex = {
     AttributeSuffix : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\$\=\"[A-Za-z]+\"\]$/,   // E[attr$=value]
     AttributeContains : /^(\#|\.)?[A-Za-z]+\[[A-Za-z]+\*\=\"[A-Za-z]+\"\]$/, // E[attr*=value]
     Root : /^(\#|\.)?[a-zA-Z]*:root/,                                        // E:root, :root
+    // todo add nth-child selectors like in attribute, odd, even, #n+# etc)
+    
 };
 
 /**
@@ -80,6 +84,10 @@ export default function getType(selector) {
     
     if (SelectorTypeRegex.Root.test(selector)) {
         return SelectorType.Root;
+    }
+    
+    if (SelectorCategoryRegex.NthChild.test(selector)) {
+        return SelectorType.NthChild;
     }
     
     if (SelectorCategoryRegex.Attribute.test(selector)) {

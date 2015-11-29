@@ -131,5 +131,9 @@ describe('getType(selector)', function() {
         it('Root selector (.class:root)', () => {
             expect(getType('.myClass:root')).to.equal(SelectorType.Root);
         });
+        
+        it('Nth-child Selector', () => {
+            expect(getType('div:nth-child(2)')).to.equal(SelectorType.NthChild);
+        });
     });
 });
